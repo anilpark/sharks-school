@@ -1,8 +1,12 @@
 <script lang="ts">
-	const logoShark = '/assets/2ca775344e9d2aaa7b86bd6b808bef0482c86375.svg';
-	const telegramIcon = '/assets/f9a679fa7018c52f9ba0b79036dfd85097f64152.svg';
-	const instagramIcon = '/assets/9bb335fc3279540cdee8f6a312d49ba3b0d3417c.svg';
-	const linkedinIcon = '/assets/e7e56c35286fc32a438162f1803877da5d5ab981.svg';
+	import logoShark from '$lib/assets/bottomlogo.svg';
+	import telegramIcon from '$lib/assets/footerTelegram.svg';
+	import instagramIcon from '$lib/assets/footerInstagram.svg';
+	import linkedinIcon from '$lib/assets/footerLinkedin.svg';
+	import { resolve } from '$app/paths';
+
+	const currentYear = new Date().getFullYear();
+	const email = 'SharkSchool@gmail.com';
 
 	const navLinks = [
 		{ label: 'Головна', href: '#home' },
@@ -23,67 +27,76 @@
 </script>
 
 <footer
-	class="w-full py-16 relative overflow-hidden"
+	class="relative w-full overflow-hidden py-16"
 	style="background: linear-gradient(180deg, #2b83ff 0%, #0450fb 100%)"
 >
-	<div class="max-w-[1278px] mx-auto px-6 flex items-start justify-between gap-12 flex-wrap">
-		<!-- Left column: logo, copyright, email, legal -->
-		<div class="flex flex-col justify-between h-full min-h-[419px] max-w-[260px]">
+	<div class="mx-auto flex max-w-[1278px] flex-wrap items-start justify-between gap-12 px-6">
+		<div class="flex h-full min-h-[419px] max-w-[260px] flex-col justify-between">
 			<div class="flex flex-col gap-9">
-				<!-- Logo -->
-				<div class="flex items-center gap-2 h-[68px]">
+				<div class="flex h-[68px] items-center gap-2">
 					<img src={logoShark} alt="Sharks School" class="h-[68px] w-auto" />
-					<div class="font-righteous leading-none ml-1">
-						<div class="text-white" style="font-family: 'Righteous', sans-serif; font-size: 24px; line-height: 1.137">Sharks</div>
-						<div class="text-white" style="font-family: 'Righteous', sans-serif; font-size: 24px; line-height: 0.917">School</div>
+					<div class="ml-1 font-righteous leading-none">
+						<div
+							class="text-white"
+							style="font-family: 'Righteous', sans-serif; font-size: 24px; line-height: 1.137"
+						>
+							Sharks
+						</div>
+						<div
+							class="text-white"
+							style="font-family: 'Righteous', sans-serif; font-size: 24px; line-height: 0.917"
+						>
+							School
+						</div>
 					</div>
 				</div>
 
-				<!-- Copyright -->
-				<p class="text-white text-[18px] leading-[1.5]">
-					© 2025 Sharks School<br />Всі права захищено
+				<p class="text-[18px] leading-[1.5] text-white">
+					© {currentYear} Sharks School<br />Всі права захищено
 				</p>
 
-				<!-- Email -->
-				<div class="flex flex-col gap-1 text-white text-[18px] leading-[1.5]">
+				<div class="flex flex-col gap-1 text-[18px] leading-[1.5] text-white">
 					<span class="font-medium">Email</span>
-					<span>SharkSchool@gmail.com</span>
+					<a href={`mailto:${email}`} class="underline transition-opacity hover:opacity-80">
+						{email}
+					</a>
 				</div>
 			</div>
 
-			<!-- Legal links -->
-			<div class="flex flex-col gap-4 text-white text-[16px] underline mt-8">
-				<a href="/terms" class="hover:opacity-80 transition-opacity">Умови використання</a>
-				<a href="/privacy" class="hover:opacity-80 transition-opacity">Політика конфіденційності</a>
+			<div class="mt-8 flex flex-col gap-4 text-[16px] text-white underline">
+				<a href={resolve('/')} class="transition-opacity hover:opacity-80">Умови використання</a>
+				<a href={resolve('/')} class="transition-opacity hover:opacity-80">
+					Політика конфіденційності
+				</a>
 			</div>
 		</div>
 
-		<!-- Right column: navigation + social -->
-		<div class="flex gap-[100px] flex-wrap">
-			<!-- Navigation -->
+		<div class="flex flex-wrap gap-[100px]">
 			<div class="flex flex-col gap-[30px]">
-				<p class="text-white font-medium text-[20px] leading-[1.5]">Навігація</p>
+				<p class="text-[20px] leading-[1.5] font-medium text-white">Навігація</p>
 				<nav class="flex flex-col gap-[23px]">
-					{#each navLinks as link}
-						<a href={link.href} class="text-white text-[18px] leading-normal hover:opacity-80 transition-opacity">
+					{#each navLinks as link, i (i + 100)}
+						<a
+							href={link.href}
+							class="text-[18px] leading-normal text-white transition-opacity hover:opacity-80"
+						>
 							{link.label}
 						</a>
 					{/each}
 				</nav>
 			</div>
 
-			<!-- Social links -->
 			<div class="flex flex-col gap-[30px]">
-				<p class="text-white font-medium text-[20px] leading-[1.5]">Соц мережі</p>
+				<p class="text-[20px] leading-[1.5] font-medium text-white">Соц мережі</p>
 				<div class="flex flex-col gap-[18px]">
-					{#each socials as social}
+					{#each socials as social, i (i)}
 						<a
 							href={social.href}
+							rel="external noopener noreferrer"
 							target="_blank"
-							rel="noopener noreferrer"
-							class="flex items-center gap-2 text-white text-[18px] leading-[1.5] hover:opacity-80 transition-opacity"
+							class="flex items-center gap-2 text-[18px] leading-[1.5] text-white transition-opacity hover:opacity-80"
 						>
-							<img src={social.icon} alt="" class="w-6 h-6" />
+							<img src={social.icon} alt="" class="h-6 w-6" />
 							{social.label}
 						</a>
 					{/each}

@@ -1,18 +1,18 @@
 <script lang="ts">
-	const img01 = '/assets/ba17419e76a4ba00202437c6617dfd9e38fe2acf.webp';
-	const img02 = '/assets/9ca58b304a7aadffadef9e8704f61089924758dd.webp';
-	const img03 = '/assets/1a88e508f8569b63c11f70e50bca5f8aa1ab21c4.webp';
+	import orangePin from '$lib/assets/orange-pin.webp';
+	import bluePin from '$lib/assets/blue-pin.webp';
+	import purplePin from '$lib/assets/purple-pin.webp';
 
 	const cards = [
 		{
 			number: '01',
 			title: 'Тепла атмосфера',
-			desc: "комʼюніті викладачів та учнів, де підтримують і мотивують",
+			desc: 'комʼюніті викладачів та учнів, де підтримують і мотивують',
 			bg: '#fff3eb',
 			titleColor: '#573012',
 			descColor: '#573012',
 			numColor: '#c29369',
-			img: img01,
+			img: orangePin,
 			rotate: 'rotate-[5deg]',
 			top: '15px',
 			left: 'calc(15% + 10px)'
@@ -25,7 +25,7 @@
 			titleColor: '#191360',
 			descColor: '#191360',
 			numColor: '#5677d5',
-			img: img02,
+			img: bluePin,
 			rotate: 'rotate-[-5deg]',
 			top: '147px',
 			left: 'calc(58% + 10px)'
@@ -38,7 +38,7 @@
 			titleColor: '#4c1360',
 			descColor: '#4c1360',
 			numColor: '#a673d0',
-			img: img03,
+			img: purplePin,
 			rotate: 'rotate-[5deg]',
 			top: '606px',
 			left: 'calc(15% + 40px)'
@@ -51,7 +51,7 @@
 			titleColor: '#573012',
 			descColor: '#573012',
 			numColor: '#c29369',
-			img: img01,
+			img: orangePin,
 			rotate: 'rotate-[-5deg]',
 			top: '770px',
 			left: 'calc(56% + 10px)'
@@ -59,55 +59,62 @@
 	];
 </script>
 
-<section id="what-awaits" class="w-full py-20 relative overflow-hidden">
+<section id="what-awaits" class="relative w-full overflow-hidden py-14 sm:py-16 lg:py-20">
 	<!-- Header -->
-	<div class="flex flex-col items-center gap-4 mb-20 px-4">
+	<div class="mb-10 flex flex-col items-center gap-3 px-4 sm:mb-14 sm:gap-4 lg:mb-20">
 		<div class="relative">
 			<h2 class="section-title text-gradient-dark text-center">Що на вас чекає</h2>
+
+			<!-- Mobile ?? -->
 			<span
-				class="absolute font-caveat text-[#0450fb] text-[90px] leading-none"
-				style="font-family: 'Caveat', cursive; top: -20px; right: -60px; transform: rotate(-5deg)"
+				class="absolute top-0 right-[-30px] font-caveat text-[43.36px] leading-none tracking-[-0.04em] text-[#5677D5] sm:top-[-14px] sm:right-[-26px] lg:hidden"
+				style="font-family: 'Caveat', cursive; transform: rotate(-5deg);"
+			>
+				??
+			</span>
+
+			<!-- Desktop ?? -->
+			<span
+				class="absolute hidden font-caveat text-[90px] leading-none text-[#0450fb] lg:block"
+				style="font-family: 'Caveat', cursive; top: -28px; right: -70px; transform: rotate(-5deg)"
 			>
 				??
 			</span>
 		</div>
-		<p class="section-subtitle text-center max-w-[781px]">
+
+		<p class="section-subtitle max-w-[781px] text-center">
 			Цікаві уроки, спілкування, практичні завдання й тепла атмосфера
 		</p>
 	</div>
 
-	<!-- Cards grid - desktop staggered layout -->
-	<div class="hidden lg:block relative h-[1300px] max-w-[1400px] mx-auto">
-		{#each cards as card}
-			<div
-				class="absolute {card.rotate}"
-				style="top: {card.top}; left: {card.left}; width: 408px;"
-			>
+	<!-- Desktop staggered layout -->
+	<div class="paper-pattern relative mx-auto hidden h-[1300px] max-w-[1400px] lg:block">
+		{#each cards as card, index (index)}
+			<div class="absolute {card.rotate}" style="top: {card.top}; left: {card.left}; width: 408px;">
 				<div
-					class="relative rounded-[56px] shadow-[0_37px_46px_0_rgba(45,6,6,0.1)] pt-[85px] px-[21px] pb-[21px] flex flex-col gap-4 bg-white"
+					class="relative flex flex-col gap-4 rounded-[56px] bg-white px-[21px] pt-[85px] pb-[21px] shadow-[0_37px_46px_0_rgba(45,6,6,0.1)]"
 				>
-					<!-- Sticker on top -->
 					<div
-						class="absolute -top-7 left-1/2 -translate-x-1/2 w-[105px] h-[108px] overflow-visible"
+						class="absolute -top-7 left-1/2 h-[108px] w-[105px] -translate-x-1/2 overflow-visible"
 					>
-						<span
-							class="absolute font-caveat text-[73px] leading-none"
-							style="font-family: 'Caveat', cursive; color: {card.numColor}; top: -18px; left: 50%; transform: translateX(-50%)"
-						>
-							{card.number}
-						</span>
+						<img src={card.img} alt="" />
 					</div>
 
-					<!-- Card body -->
 					<div
-						class="rounded-[37px] p-6 flex flex-col gap-4 min-h-[294px]"
+						class="flex min-h-[294px] flex-col gap-4 rounded-[37px] p-6"
 						style="background-color: {card.bg}"
 					>
-						<h3 class="text-[32px] font-medium leading-normal" style="color: {card.titleColor}">
+						<p
+							class="font-caveat text-[73px] leading-none"
+							style="font-family: 'Caveat', cursive; color: {card.numColor};"
+						>
+							{card.number}
+						</p>
+						<h3 class="text-[32px] leading-normal font-medium" style="color: {card.titleColor}">
 							{card.title}
 						</h3>
 						<p
-							class="text-[22px] font-medium leading-normal opacity-70"
+							class="text-[22px] leading-normal font-medium opacity-70"
 							style="color: {card.descColor}"
 						>
 							{card.desc}
@@ -118,26 +125,79 @@
 		{/each}
 	</div>
 
-	<!-- Mobile cards (stacked) -->
-	<div class="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl mx-auto px-4">
-		{#each cards as card}
-			<div class="rounded-[40px] shadow-[0_37px_46px_0_rgba(45,6,6,0.1)] pt-16 px-5 pb-5 bg-white relative">
+	<!-- Mobile / tablet cards -->
+	<div
+		class="mobile-paper-pattern mx-auto flex max-w-[320px] flex-col items-center gap-12.5 px-4 sm:max-w-[560px] sm:gap-7 md:hidden"
+	>
+		{#each cards as card, index (index)}
+			<div class={`w-full max-w-[253px] ${index % 2 === 0 ? 'rotate-[5deg]' : 'rotate-[-5deg]'}`}>
 				<div
-					class="rounded-[30px] p-5 flex flex-col gap-3"
-					style="background-color: {card.bg}"
+					class="relative flex min-h-[248.04px] flex-col gap-[9.55px] rounded-[34.73px] bg-white px-[13.23px] pt-[52.92px] pb-[13.23px] shadow-[0_24px_32px_0_rgba(45,6,6,0.10)]"
 				>
-					<span
-						class="font-caveat text-[48px] leading-none mb-1"
-						style="font-family: 'Caveat', cursive; color: {card.numColor}"
+					<div class="absolute -top-5 left-1/2 h-[78px] w-[76px] -translate-x-1/2 overflow-visible">
+						<img src={card.img} alt="" class="h-full w-full object-contain" />
+					</div>
+
+					<div
+						class="flex min-h-[168px] flex-col gap-2 rounded-[24px] px-4 py-4"
+						style="background-color: {card.bg}"
 					>
-						{card.number}
-					</span>
-					<h3 class="text-[24px] font-medium leading-normal" style="color: {card.titleColor}">
-						{card.title}
-					</h3>
-					<p class="text-[18px] font-medium leading-normal opacity-70" style="color: {card.descColor}">
-						{card.desc}
-					</p>
+						<p
+							class="font-caveat text-[46px] leading-none tracking-[-0.04em]"
+							style="font-family: 'Caveat', cursive; color: {card.numColor};"
+						>
+							{card.number}
+						</p>
+
+						<h3 class="text-[22px] leading-[1.05] font-medium" style="color: {card.titleColor}">
+							{card.title}
+						</h3>
+
+						<p
+							class="text-[16px] leading-[1.2] font-medium opacity-70"
+							style="color: {card.descColor}"
+						>
+							{card.desc}
+						</p>
+					</div>
+				</div>
+			</div>
+		{/each}
+	</div>
+
+	<!-- Small tablet -->
+	<div class="mx-auto hidden max-w-[760px] grid-cols-2 gap-6 px-6 md:grid lg:hidden">
+		{#each cards as card, index (index)}
+			<div class={`${index % 2 === 0 ? 'rotate-[5deg]' : 'rotate-[-5deg]'}`}>
+				<div
+					class="relative flex min-h-[280px] flex-col gap-3 rounded-[36px] bg-white px-4 pt-[58px] pb-4 shadow-[0_28px_36px_0_rgba(45,6,6,0.10)]"
+				>
+					<div class="absolute -top-5 left-1/2 h-[84px] w-[82px] -translate-x-1/2 overflow-visible">
+						<img src={card.img} alt="" class="h-full w-full object-contain" />
+					</div>
+
+					<div
+						class="flex min-h-[190px] flex-col gap-3 rounded-[26px] p-5"
+						style="background-color: {card.bg}"
+					>
+						<p
+							class="font-caveat text-[54px] leading-none tracking-[-0.04em]"
+							style="font-family: 'Caveat', cursive; color: {card.numColor};"
+						>
+							{card.number}
+						</p>
+
+						<h3 class="text-[24px] leading-[1.1] font-medium" style="color: {card.titleColor}">
+							{card.title}
+						</h3>
+
+						<p
+							class="text-[17px] leading-[1.25] font-medium opacity-70"
+							style="color: {card.descColor}"
+						>
+							{card.desc}
+						</p>
+					</div>
 				</div>
 			</div>
 		{/each}

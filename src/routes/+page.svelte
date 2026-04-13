@@ -19,14 +19,16 @@
 	/>
 </svelte:head>
 
-<div class="min-h-screen bg-white">
+<div class="min-h-scree">
 	<Header />
 	<main>
 		<Hero />
 		<Stats />
 		<WhatAwaits />
 		<Team />
-		<Reviews />
+		<div class="blue-pattern">
+			<Reviews />
+		</div>
 		<Pricing />
 		<Values />
 		<FAQ />

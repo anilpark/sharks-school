@@ -1,36 +1,34 @@
 <script lang="ts">
-	const handshakeIcon = '/assets/747971f51fd5cb5902c6aa32c4d98ebc96a31241.svg';
-	const systemIcon = '/assets/4c9494b4021fc290634fa2d8b1de3dbeb6193fec.svg';
-	const bookIcon = '/assets/98cdfa68f69dc41e7aa07f6879a4bdc1ebcec81b.svg';
-	const personIcon = '/assets/db09f8421b3d77ffc0ed104c14c85e8a79780a08.svg';
-	const goalIcon = '/assets/fa868754196e5dd099f5c7ba6b2ef39a627ee39a.svg';
-	const heartIcon = '/assets/d07d454d60525aace8d7a98b3e5cb7810cc7dc41.svg';
-	const dividerLight = '/assets/8536ceb11d5ef7054f1822840859f8bb42c19dc2.svg';
-	const dividerWhite = '/assets/b525f7323aa861d38a44218192c8e57a5ee615f1.svg';
+	import handshakeIcon from '$lib/assets/handshake-icon.svg';
+	import systemIcon from '$lib/assets/interval.svg';
+	import bookIcon from '$lib/assets/materials.svg';
+	import personIcon from '$lib/assets/individual.svg';
+	import goalIcon from '$lib/assets/goal.svg';
+	import heartIcon from '$lib/assets/community.svg';
 
 	const values = [
 		{
 			icon: handshakeIcon,
 			title: 'Методика + комфорт',
-			desc: "Комунікативний та лексичний підходи на уроці поєднуються з дружньою атмосферою та сприятливою атмосферою, де помилки не лякають",
+			desc: 'Комунікативний та лексичний підходи на уроці поєднуються з дружньою атмосферою та сприятливою атмосферою, де помилки не лякають',
 			blue: true
 		},
 		{
 			icon: systemIcon,
 			title: 'Системність',
-			desc: "Особистий кабінет у CRM системі з активними посиланнями, домашніми завданнями, записами оплат і колесом прогресу",
+			desc: 'Особистий кабінет у CRM системі з активними посиланнями, домашніми завданнями, записами оплат і колесом прогресу',
 			blue: false
 		},
 		{
 			icon: bookIcon,
 			title: 'Матеріали',
-			desc: "Ми використовуємо багато автентичних ресурсів — статті, відео, подкасти, серіали, аніме — щоб навчання було максимально живим і корисним",
+			desc: 'Ми використовуємо багато автентичних ресурсів — статті, відео, подкасти, серіали, аніме — щоб навчання було максимально живим і корисним',
 			blue: false
 		},
 		{
 			icon: personIcon,
 			title: 'Індивідуальний підхід',
-			desc: "Програма занять створюється персонально — на основі вашого рівня, цілей і тем, які справді вас цікавлять",
+			desc: 'Програма занять створюється персонально — на основі вашого рівня, цілей і тем, які справді вас цікавлять',
 			blue: false
 		},
 		{
@@ -41,33 +39,33 @@
 		},
 		{
 			icon: heartIcon,
-			title: "Наше комʼюніті ❤️",
-			desc: "Ми не просто школа, ми — середовище. Книжковий клуб, Розмовні зустрічі, Telegram-канал із англомовним контентом, тут легко знайти друзів, однодумців і мотивацію",
+			title: 'Наше комʼюніті ❤️',
+			desc: 'Ми не просто школа, ми — середовище. Книжковий клуб, Розмовні зустрічі, Telegram-канал із англомовним контентом, тут легко знайти друзів, однодумців і мотивацію',
 			blue: false
 		}
 	];
 </script>
 
-<section id="values" class="w-full py-20 px-6">
+<section id="values" class="w-full px-6 py-20">
 	<!-- Header -->
-	<div class="flex flex-col items-center gap-5 mb-16">
-		<h2 class="section-title text-gradient-dark text-center max-w-[1066px]">Наші цінності</h2>
-		<p class="text-[#2a2a2a] text-[24px] text-center leading-[1.2]">
+	<div class="mb-16 flex flex-col items-center gap-5">
+		<h2 class="section-title text-gradient-dark max-w-[1066px] text-center">Наші цінності</h2>
+		<p class="text-center text-[24px] leading-[1.2] text-[#2a2a2a]">
 			Формують нашу взаємодію, рішення та спосіб, у який ми розвиваємо нашу школу
 		</p>
 	</div>
 
 	<!-- Values grid -->
-	<div class="max-w-[1277px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-		{#each values as value}
+	<div class="mx-auto grid max-w-[1277px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+		{#each values as value, i (i)}
 			<div
-				class="rounded-[12px] shadow-[0_2.8px_2.8px_0_rgba(0,0,0,0.05)] p-5 h-[324px] flex flex-col justify-between overflow-hidden"
+				class="flex h-[324px] flex-col justify-between overflow-hidden rounded-[12px] p-5 shadow-[0_2.8px_2.8px_0_rgba(0,0,0,0.05)]"
 				style={value.blue
 					? 'background: linear-gradient(180deg, #2b83ff 0%, #176afd 50%, #0450fb 100%)'
 					: 'background: white'}
 			>
-				<div class="w-14 h-14 flex items-center justify-center">
-					<img src={value.icon} alt="" class="w-full h-full object-contain" />
+				<div class="flex h-14 w-14 items-center justify-center">
+					<img src={value.icon} alt="" class="h-full w-full object-contain" />
 				</div>
 
 				<div class="flex flex-col gap-4">
@@ -78,9 +76,9 @@
 					>
 						{value.desc}
 					</p>
-					<div class="border-t {value.blue ? 'border-white/30' : 'border-[#e0e0e0]'}"></div>
+					<div class="border-t {value.blue ? 'whiteBorder' : 'blueBorder'}"></div>
 					<h3
-						class="font-medium text-[24px] leading-[1.15] tracking-[-0.72px]"
+						class="text-[24px] leading-[1.15] font-medium tracking-[-0.72px]"
 						class:text-white={value.blue}
 						class:text-[#045ca9]={!value.blue}
 					>
@@ -91,3 +89,28 @@
 		{/each}
 	</div>
 </section>
+
+<style>
+	.blueBorder {
+		border: 1px solid transparent;
+		border-image: linear-gradient(
+				90deg,
+				rgba(4, 92, 169, 0) 0%,
+				rgba(4, 92, 169, 0.8) 15.87%,
+				rgba(4, 92, 169, 0.8) 87.02%,
+				rgba(4, 92, 169, 0) 100%
+			)
+			1;
+	}
+	.whiteBorder {
+		border: 1px solid transparent;
+		border-image: linear-gradient(
+				90deg,
+				rgba(255, 255, 255, 0) 0%,
+				rgba(255, 255, 255, 0.8) 15.87%,
+				rgba(255, 255, 255, 0.8) 87.02%,
+				rgba(255, 255, 255, 0) 100%
+			)
+			1;
+	}
+</style>

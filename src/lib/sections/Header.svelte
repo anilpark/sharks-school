@@ -53,6 +53,7 @@
 			updateActive();
 			closeMobileMenu();
 		};
+
 		const handleEscape = (event: KeyboardEvent) => {
 			if (event.key === 'Escape') {
 				closeMobileMenu();
@@ -69,30 +70,31 @@
 	});
 </script>
 
-<header class="w-full h-22 relative z-50">
+<header class="relative z-50 h-[84px] w-full sm:h-[92px] lg:h-22">
+	<!-- Desktop -->
 	<nav
-		class="fixed top-2.5 left-1/2 -translate-x-1/2 w-[min(1280px,calc(100vw-40px))] bg-white rounded-[40px] shadow-[0px_12px_20px_0px_rgba(6,20,45,0.04),0px_-40px_30px_0px_white,0px_0px_30px_0px_white] hidden lg:flex items-center justify-between pl-6 pr-1 py-3 h-[76px]"
+		class="fixed top-2.5 left-1/2 hidden h-[76px] w-[min(1280px,calc(100vw-40px))] -translate-x-1/2 items-center justify-between rounded-[40px] bg-white py-3 pr-1 pl-6 shadow-[0px_12px_20px_0px_rgba(6,20,45,0.04),0px_-40px_30px_0px_white,0px_0px_30px_0px_white] lg:flex"
 	>
-		<a href={`${resolve('/')}#home`} class="flex items-center gap-2 shrink-0">
+		<a href={`${resolve('/')}#home`} class="flex shrink-0 items-center gap-2">
 			<img src={logoShark} alt="Sharks School logo" class="logo" />
-			<div class="font-righteous leading-none text-sm">
+			<div class="font-righteous text-sm leading-none">
 				<div class="text-primary-dark" style="font-size: 16px; line-height: 1.137">Sharks</div>
 				<div class="text-[#ee606f]" style="font-size: 16px; line-height: 0.917">School</div>
 			</div>
 		</a>
 
-		<div class="flex items-center gap-7">
+		<div class="flex items-center gap-5 xl:gap-7">
 			{#each desktopNavLinks as link (link.href)}
 				<a
 					href={`${resolve('/')}${link.href}`}
 					on:click={() => handleLinkClick(link.href)}
-					class="flex flex-col items-center gap-1 font-medium text-[18px] transition-colors"
+					class="flex flex-col items-center gap-1 text-[16px] font-medium transition-colors xl:text-[18px]"
 					class:text-[#31302e]={activeHash === link.href}
 					class:text-[#6e6b66]={activeHash !== link.href}
 				>
 					{link.label}
 					{#if activeHash === link.href}
-						<span class="w-2 h-2 rounded-full bg-primary"></span>
+						<span class="h-2 w-2 rounded-full bg-primary"></span>
 					{/if}
 				</a>
 			{/each}
@@ -101,44 +103,53 @@
 		<a
 			href={`${resolve('/')}#contact`}
 			on:click={() => handleLinkClick('#contact')}
-			class="btn-blue-pill text-[18px] h-[68px] px-10 shrink-0"
+			class="btn-blue-pill flex h-[62px] shrink-0 items-center justify-center px-7 text-[16px] xl:h-[68px] xl:px-10 xl:text-[18px]"
 		>
 			Записатись
 		</a>
 	</nav>
 
+	<!-- Mobile / Tablet -->
 	<nav
-		class="fixed top-2.5 left-1/2 -translate-x-1/2 w-[min(100vw-20px,480px)] bg-white rounded-[32px] shadow-[0px_12px_20px_0px_rgba(6,20,45,0.04),0px_-20px_30px_0px_white,0px_0px_30px_0px_white] flex lg:hidden items-center justify-between px-5 py-3 h-[76px]"
+		class="fixed top-2 left-1/2 flex h-[64px] w-[calc(100vw-16px)] max-w-[480px] -translate-x-1/2 items-center justify-between rounded-[24px] bg-white px-4 py-2 shadow-[0px_12px_20px_0px_rgba(6,20,45,0.04),0px_-20px_30px_0px_white,0px_0px_30px_0px_white] sm:top-2.5 sm:h-[72px] sm:w-[min(100vw-20px,480px)] sm:rounded-[28px] sm:px-5 sm:py-3 lg:hidden"
 	>
-		<a href={`${resolve('/')}#home`} on:click={() => handleLinkClick('#home')} class="flex items-center gap-2">
-			<img src={logoShark} alt="Sharks School logo" class="logo" />
-			<div class="font-righteous leading-none text-sm">
-				<div class="text-primary-dark" style="font-size: 16px; line-height: 1.137">Sharks</div>
-				<div class="text-[#ee606f]" style="font-size: 16px; line-height: 0.917">School</div>
+		<a
+			href={`${resolve('/')}#home`}
+			on:click={() => handleLinkClick('#home')}
+			class="flex min-w-0 items-center gap-2"
+		>
+			<img src={logoShark} alt="Sharks School logo" class="logo-mobile sm:logo" />
+			<div class="font-righteous leading-none">
+				<div class="text-[13px] text-primary-dark sm:text-[16px]" style="line-height: 1.137">
+					Sharks
+				</div>
+				<div class="text-[13px] text-[#ee606f] sm:text-[16px]" style="line-height: 0.917">
+					School
+				</div>
 			</div>
 		</a>
 
 		<button
 			type="button"
 			on:click={toggleMobileMenu}
-			class="relative grid place-items-center size-18 rounded-full bg-primary text-white"
+			class="relative grid h-11 w-11 shrink-0 place-items-center rounded-full bg-primary text-white sm:h-12 sm:w-12"
 			aria-expanded={isMobileMenuOpen}
 			aria-controls="mobile-navigation-menu"
 			aria-label={isMobileMenuOpen ? 'Закрити меню' : 'Відкрити меню'}
 		>
 			<span
-				class="absolute h-0.5 w-7 rounded bg-white transition-transform"
+				class="absolute h-0.5 w-5 rounded bg-white transition-transform sm:w-6"
 				class:rotate-45={isMobileMenuOpen}
-				class:-translate-y-2={!isMobileMenuOpen}
+				class:-translate-y-1.5={!isMobileMenuOpen}
 			></span>
 			<span
-				class="absolute h-0.5 w-7 rounded bg-white transition-opacity"
+				class="absolute h-0.5 w-5 rounded bg-white transition-opacity sm:w-6"
 				class:opacity-0={isMobileMenuOpen}
 			></span>
 			<span
-				class="absolute h-0.5 w-7 rounded bg-white transition-transform"
+				class="absolute h-0.5 w-5 rounded bg-white transition-transform sm:w-6"
 				class:-rotate-45={isMobileMenuOpen}
-				class:translate-y-2={!isMobileMenuOpen}
+				class:translate-y-1.5={!isMobileMenuOpen}
 			></span>
 		</button>
 	</nav>
@@ -153,20 +164,20 @@
 
 		<div
 			id="mobile-navigation-menu"
-			class="fixed top-22.5 left-1/2 -translate-x-1/2 z-50 w-[min(100vw-20px,480px)] rounded-[36px] bg-[#e8eefb] px-8 pb-8 pt-6 shadow-[0px_18px_30px_0px_rgba(6,20,45,0.12)] lg:hidden"
+			class="fixed top-[74px] left-1/2 z-50 w-[calc(100vw-16px)] max-w-[480px] -translate-x-1/2 rounded-[24px] bg-[#e8eefb] px-5 pt-5 pb-6 shadow-[0px_18px_30px_0px_rgba(6,20,45,0.12)] sm:top-[84px] sm:w-[min(100vw-20px,480px)] sm:rounded-[30px] sm:px-6 sm:pt-6 sm:pb-7"
 		>
-			<div class="flex flex-col gap-5">
+			<div class="flex flex-col gap-3 sm:gap-4">
 				{#each mobileNavLinks as link (link.href)}
 					<a
 						href={`${resolve('/')}${link.href}`}
 						on:click={() => handleLinkClick(link.href)}
-						class="flex items-center justify-between text-[38px] leading-none font-medium"
+						class="flex items-center justify-between gap-4 text-[24px] leading-none font-medium sm:text-[30px]"
 						class:text-primary={activeHash === link.href}
 						class:text-[#5f8eea]={activeHash !== link.href}
 					>
 						<span>{link.label}</span>
 						<span
-							class="size-2 rounded-full transition-colors"
+							class="h-2 w-2 shrink-0 rounded-full transition-colors"
 							class:bg-primary={activeHash === link.href}
 							class:bg-[#5f8eea]={activeHash !== link.href}
 						></span>
@@ -177,7 +188,7 @@
 			<a
 				href={`${resolve('/')}#contact`}
 				on:click={() => handleLinkClick('#contact')}
-				class="btn-blue-pill mt-8 h-[72px] w-full text-[22px]"
+				class="btn-blue-pill mt-6 flex h-[56px] w-full items-center justify-center text-[16px] sm:mt-7 sm:h-[64px] sm:text-[18px]"
 			>
 				Записатись на урок
 			</a>
@@ -189,5 +200,10 @@
 	.logo {
 		height: 38px;
 		width: 31px;
+	}
+
+	.logo-mobile {
+		height: 30px;
+		width: 24px;
 	}
 </style>

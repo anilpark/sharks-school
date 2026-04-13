@@ -1,7 +1,6 @@
 <script lang="ts">
-	const telegramIcon =
-		'/assets/22015b1f4ccd427c4317d174a2e794704f4c3c45.svg';
-	const plusIcon = '/assets/e7d82dad57d72f8afe12f13c91a3e9ac8aabe544.svg';
+	import telegramIcon from '$lib/assets/telegram.svg';
+	import plusIcon from '$lib/assets/plus-icon.svg';
 
 	const faqs = [
 		{
@@ -37,9 +36,9 @@
 	let openIndex: number | null = 4; // FAQ 5 is open by default (shows answer)
 </script>
 
-<section id="faq" class="w-full py-20 px-6 relative overflow-hidden">
+<section id="faq" class="relative w-full overflow-hidden px-6 py-20">
 	<!-- Header -->
-	<div class="flex flex-col items-center gap-4 mb-16 text-center max-w-[1149px] mx-auto">
+	<div class="mx-auto mb-16 flex max-w-[1149px] flex-col items-center gap-4 text-center">
 		<h2 class="section-title text-gradient-dark">Поширені запитання</h2>
 		<p class="section-subtitle max-w-[781px]">
 			Основні запитання та принципи, які дадуть вам відповіді на поширені запитання
@@ -47,29 +46,31 @@
 	</div>
 
 	<!-- FAQ accordion -->
-	<div class="max-w-[1275px] mx-auto flex flex-col gap-3 mb-12">
+	<div class="mx-auto mb-12 flex max-w-[1275px] flex-col gap-3">
 		{#each faqs as faq, i}
 			<div
-				class="bg-white rounded-[24px] shadow-[0_2.8px_2.8px_0_rgba(0,0,0,0.05)] overflow-hidden"
+				class="overflow-hidden rounded-[24px] bg-white shadow-[0_2.8px_2.8px_0_rgba(0,0,0,0.05)]"
 			>
 				<button
-					class="w-full flex items-center justify-between p-6 text-left"
+					class="flex w-full items-center justify-between p-6 text-left"
 					on:click={() => (openIndex = openIndex === i ? null : i)}
 				>
-					<span class="font-medium text-[#1d1d1d] text-[24px] tracking-[-0.96px] leading-[1.2]">
+					<span class="text-[24px] leading-[1.2] font-medium tracking-[-0.96px] text-[#1d1d1d]">
 						{i + 1}. {faq.q}
 					</span>
 					<div
-						class="w-14 h-14 rounded-full border border-[#1d1d1d] flex items-center justify-center shrink-0 ml-4 transition-transform"
+						class="ml-4 flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-[#1d1d1d] transition-transform"
 						class:rotate-45={openIndex === i}
 					>
-						<img src={plusIcon} alt="" class="w-6 h-6" />
+						<img src={plusIcon} alt="" class="h-6 w-6" />
 					</div>
 				</button>
 
 				{#if openIndex === i}
-					<div class="px-9 pb-6 border-t border-[rgba(16,16,16,0.1)]">
-						<p class="font-medium text-[#616161] text-[18px] leading-[1.2] tracking-[-0.36px] pt-5 whitespace-pre-line">
+					<div class="border-t border-[rgba(16,16,16,0.1)] px-9 pb-6">
+						<p
+							class="pt-5 text-[18px] leading-[1.2] font-medium tracking-[-0.36px] whitespace-pre-line text-[#616161]"
+						>
 							{@html faq.a}
 						</p>
 					</div>
@@ -81,11 +82,9 @@
 	<!-- CTA card -->
 	<div
 		id="contact"
-		class="max-w-[1280px] mx-auto bg-white rounded-[48px] shadow-[0_4px_4px_0_rgba(0,0,0,0.05)] p-8 flex flex-col lg:flex-row items-center justify-between gap-8"
+		class="mx-auto flex max-w-[1280px] flex-col items-center justify-between gap-8 rounded-[48px] bg-white p-8 shadow-[0_4px_4px_0_rgba(0,0,0,0.05)] lg:flex-row"
 	>
-		<p
-			class="font-medium text-[48px] leading-[1.1] tracking-[-1.92px] max-w-[723px]"
-		>
+		<p class="max-w-[723px] text-[48px] leading-[1.1] font-medium tracking-[-1.92px]">
 			<span class="text-[#4f4f4f]">Залиш свій запит — менеджер чекає на твоє </span>
 			<span
 				class="font-playfair font-bold italic"
@@ -99,10 +98,10 @@
 			href="https://t.me/sharksschool"
 			target="_blank"
 			rel="noopener noreferrer"
-			class="flex items-center gap-4 h-[73px] px-9 rounded-[20px] text-white font-medium text-[22px] shrink-0 transition-opacity hover:opacity-90 border-t-[3px] border-white/40"
+			class="flex h-[73px] shrink-0 items-center gap-4 rounded-[20px] border-t-[3px] border-white/40 px-9 text-[22px] font-medium text-white transition-opacity hover:opacity-90"
 			style="background: linear-gradient(180deg, #2b83ff 0%, #176afd 50%, #0450fb 100%)"
 		>
-			<img src={telegramIcon} alt="" class="w-7 h-7" />
+			<img src={telegramIcon} alt="" class="h-7 w-7" />
 			Написати менеджеру
 		</a>
 	</div>
