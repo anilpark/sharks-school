@@ -1,445 +1,156 @@
 <script lang="ts">
 	import telegramIcon from '$lib/assets/telegram.svg';
 	import sharkLogo from '$lib/assets/uniqueShark.svg';
-
-	type Language = 'english' | 'polish';
-	type Format = 'individual' | 'pair' | 'group';
-
-	type Plan = {
-		title: string;
-		price: string;
-		perLesson: string | null;
-		description: string;
-		cta: string;
-		popular?: boolean;
-		highlight?: boolean;
-	};
-
-	type CustomRequest = {
-		title: string;
-		description: string;
-		cta: string;
-	};
-
-	type PricingBlock = {
-		plans: Plan[];
-		customRequest: CustomRequest;
-	};
-
-	type PricingContent = Record<Language, Record<Format, PricingBlock>>;
-
-	const languageOptions: { value: Language; label: string }[] = [
-		{ value: 'english', label: 'Англійська' },
-		{ value: 'polish', label: 'Польська' }
-	];
-
-	const formatOptions: { value: Format; label: string }[] = [
-		{ value: 'individual', label: 'Індивідуальні' },
-		{ value: 'pair', label: 'Парні' },
-		{ value: 'group', label: 'Групові' }
-	];
+	import {
+		formatOptions,
+		languageOptions,
+		pricingContent,
+		type Format,
+		type Language
+	} from '$lib/content/pricing';
 
 	let selectedLanguage = $state<Language>('english');
 	let selectedFormat = $state<Format>('individual');
-
-	const pricingContent: PricingContent = {
-		english: {
-			individual: {
-				plans: [
-					{
-						title: 'Пробне заняття',
-						price: '300',
-						perLesson: null,
-						description: 'Познайомтесь із викладачем і методом навчання перед стартом курсу',
-						cta: 'Хочу пробне заняття'
-					},
-					{
-						title: '4 заняття',
-						price: '2200',
-						perLesson: '550 грн за урок',
-						description: 'Ідеальний варіант, щоб спробувати формат і побачити перші результати',
-						cta: 'Хочу 4 заняття'
-					},
-					{
-						title: '8 занять',
-						price: '4240',
-						perLesson: '530 грн за урок',
-						description: 'План для тих, хто хоче стабільно вдосконалювати англійську щотижня',
-						cta: 'Хочу 8 занять',
-						popular: true,
-						highlight: true
-					},
-					{
-						title: '12 занять',
-						price: '6000',
-						perLesson: '500 грн за урок',
-						description: 'Найвигідніший пакет для системного навчання та помітного прогресу',
-						cta: 'Хочу 12 занять'
-					}
-				],
-				customRequest: {
-					title: 'Унікальний запит',
-					description:
-						'Особливі запити з англійської: бізнес, співбесіди, конференції, корпоративне навчання, професійна англійська.',
-					cta: 'Написати менеджеру'
-				}
-			},
-			pair: {
-				plans: [
-					{
-						title: 'Пробне заняття',
-						price: '250',
-						perLesson: null,
-						description: 'Спробуйте формат занять удвох та познайомтесь із викладачем',
-						cta: 'Хочу пробне заняття'
-					},
-					{
-						title: '4 заняття',
-						price: '1600',
-						perLesson: '400 грн за урок',
-						description: 'Зручний старт для навчання разом із другом або партнером',
-						cta: 'Хочу 4 заняття'
-					},
-					{
-						title: '8 занять',
-						price: '3040',
-						perLesson: '380 грн за урок',
-						description: 'Оптимальний пакет для регулярної практики англійської у парі',
-						cta: 'Хочу 8 занять',
-						popular: true,
-						highlight: true
-					},
-					{
-						title: '12 занять',
-						price: '4320',
-						perLesson: '360 грн за урок',
-						description: 'Максимальна вигода для стабільного навчання та швидшого прогресу',
-						cta: 'Хочу 12 занять'
-					}
-				],
-				customRequest: {
-					title: 'Унікальний запит',
-					description:
-						'Парні заняття з англійської для друзів, пар, колег або партнерів з адаптованою програмою.',
-					cta: 'Написати менеджеру'
-				}
-			},
-			group: {
-				plans: [
-					{
-						title: 'Пробне заняття',
-						price: '200',
-						perLesson: null,
-						description: 'Познайомтесь із групою, викладачем і форматом перед стартом',
-						cta: 'Хочу пробне заняття'
-					},
-					{
-						title: '4 заняття',
-						price: '1200',
-						perLesson: '300 грн за урок',
-						description: 'Комфортний формат для старту в групі з підтримкою однодумців',
-						cta: 'Хочу 4 заняття'
-					},
-					{
-						title: '8 занять',
-						price: '2240',
-						perLesson: '280 грн за урок',
-						description: 'Найкращий вибір для регулярної практики англійської в групі',
-						cta: 'Хочу 8 занять',
-						popular: true,
-						highlight: true
-					},
-					{
-						title: '12 занять',
-						price: '3120',
-						perLesson: '260 грн за урок',
-						description: 'Вигідний пакет для системного розвитку мовних навичок',
-						cta: 'Хочу 12 занять'
-					}
-				],
-				customRequest: {
-					title: 'Унікальний запит',
-					description:
-						'Групові програми з англійської для команд, компаній або тематичних напрямів.',
-					cta: 'Написати менеджеру'
-				}
-			}
-		},
-		polish: {
-			individual: {
-				plans: [
-					{
-						title: 'Пробне заняття',
-						price: '300',
-						perLesson: null,
-						description: 'Познайомтесь із викладачем і форматом навчання перед початком курсу',
-						cta: 'Хочу пробне заняття'
-					},
-					{
-						title: '4 заняття',
-						price: '2100',
-						perLesson: '525 грн за урок',
-						description: 'Зручний пакет, щоб спробувати формат і зробити перші кроки в польській',
-						cta: 'Хочу 4 заняття'
-					},
-					{
-						title: '8 занять',
-						price: '4000',
-						perLesson: '500 грн за урок',
-						description: 'Оптимальний варіант для стабільного прогресу в польській мові',
-						cta: 'Хочу 8 занять',
-						popular: true,
-						highlight: true
-					},
-					{
-						title: '12 занять',
-						price: '5640',
-						perLesson: '470 грн за урок',
-						description: 'Найкращий пакет для системного навчання та впевненого результату',
-						cta: 'Хочу 12 занять'
-					}
-				],
-				customRequest: {
-					title: 'Унікальний запит',
-					description:
-						'Індивідуальні програми з польської для вступу, переїзду, роботи, співбесіди або корпоративних потреб.',
-					cta: 'Написати менеджеру'
-				}
-			},
-			pair: {
-				plans: [
-					{
-						title: 'Пробне заняття',
-						price: '250',
-						perLesson: null,
-						description: 'Спробуйте парний формат і навчайтесь разом у комфортному темпі',
-						cta: 'Хочу пробне заняття'
-					},
-					{
-						title: '4 заняття',
-						price: '1520',
-						perLesson: '380 грн за урок',
-						description: 'Зручне рішення для навчання удвох з фокусом на спільну мету',
-						cta: 'Хочу 4 заняття'
-					},
-					{
-						title: '8 занять',
-						price: '2880',
-						perLesson: '360 грн за урок',
-						description: 'Оптимальний пакет для регулярної практики польської у парі',
-						cta: 'Хочу 8 занять',
-						popular: true,
-						highlight: true
-					},
-					{
-						title: '12 занять',
-						price: '4080',
-						perLesson: '340 грн за урок',
-						description: 'Найвигідніше рішення для довшого спільного навчання',
-						cta: 'Хочу 12 занять'
-					}
-				],
-				customRequest: {
-					title: 'Унікальний запит',
-					description:
-						'Парні заняття з польської для друзів, родини або колег з адаптованою програмою.',
-					cta: 'Написати менеджеру'
-				}
-			},
-			group: {
-				plans: [
-					{
-						title: 'Пробне заняття',
-						price: '200',
-						perLesson: null,
-						description: 'Познайомтесь із викладачем, групою та форматом навчання',
-						cta: 'Хочу пробне заняття'
-					},
-					{
-						title: '4 заняття',
-						price: '1120',
-						perLesson: '280 грн за урок',
-						description: 'Комфортний старт для занять у групі та активної мовної практики',
-						cta: 'Хочу 4 заняття'
-					},
-					{
-						title: '8 занять',
-						price: '2080',
-						perLesson: '260 грн за урок',
-						description: 'Найпопулярніший варіант для стабільного прогресу в польській',
-						cta: 'Хочу 8 занять',
-						popular: true,
-						highlight: true
-					},
-					{
-						title: '12 занять',
-						price: '2880',
-						perLesson: '240 грн за урок',
-						description: 'Вигідний пакет для тривалого навчання в групі',
-						cta: 'Хочу 12 занять'
-					}
-				],
-				customRequest: {
-					title: 'Унікальний запит',
-					description:
-						'Групові заняття з польської для компаній, освітніх проєктів або тематичних програм.',
-					cta: 'Написати менеджеру'
-				}
-			}
-		}
-	};
 
 	let currentBlock = $derived(pricingContent[selectedLanguage][selectedFormat]);
 	let plans = $derived(currentBlock.plans);
 	let customRequest = $derived(currentBlock.customRequest);
 </script>
 
-<section id="pricing" class="w-full px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
-	<div class="mx-auto max-w-[1440px]">
-		<div class="mb-8 flex flex-col items-center gap-4 lg:mb-10">
-			<h2 class="section-title text-gradient-dark max-w-[1066px] text-center">
-				Тарифи для кожного — обери свій
-			</h2>
+<section
+  id="pricing"
+  class="w-full bg-[#f5f5f5] py-10 xl:bg-transparent xl:px-8 xl:py-20"
+>
+  <div class="pricing-content-column mx-auto w-full max-w-[min(480px,calc(100vw-48px))] max-[380px]:max-w-[calc(100vw-32px)] xl:max-w-[1440px]">
+    
+    <div class="mb-6 flex flex-col items-center gap-3 xl:mb-10 xl:gap-4">
+      <h2 class="section-title w-full max-w-full px-1 text-center text-balance text-[#1d1d1d] max-xl:!text-[clamp(36px,6.2vw,32px)] max-xl:!leading-[1.08] max-xl:!tracking-[-0.035em] xl:max-w-[1066px] xl:text-gradient-dark">
+        Тарифи для кожного, обери свій
+      </h2>
+      <p class="section-subtitle w-full max-w-full px-0.5 text-center sm:max-w-[520px] xl:max-w-[760px]">
+        Оберіть нижче мову та тип занять з простим ціноутворенням для своїх цілей
+      </p>
 
-			<p class="section-subtitle max-w-[760px] text-center">
-				Оберіть нижче мову та тип занять з простим ціноутворенням для своїх цілей
-			</p>
+      <div class="mt-2 flex w-full flex-col items-stretch gap-3 xl:mt-4 xl:flex-row xl:flex-wrap xl:justify-center xl:gap-3">
+        <div class="flex w-full gap-1 rounded-full bg-[#e0e0e0] p-1.5 xl:w-auto xl:justify-center xl:gap-2 xl:rounded-[24px] xl:bg-[#e9e9e9] xl:p-2">
+          {#each languageOptions as option}
+            <button
+              type="button"
+              class="min-h-[44px] flex-1 rounded-full px-4 py-2.5 text-[15px] max-[380px]:px-2 max-[380px]:text-[13px] transition-all xl:flex-none xl:rounded-[68px] xl:px-10 xl:text-[24px] 
+              {selectedLanguage === option.value ? 'bg-white font-medium shadow-md' : 'bg-transparent'}"
+              onclick={() => (selectedLanguage = option.value)}
+            >
+              {option.label}
+            </button>
+          {/each}
+        </div>
 
-			<div class="mt-2 flex w-full items-center justify-center gap-3 lg:mt-4">
-				<div class="flex flex-wrap justify-center gap-2 rounded-[24px] bg-[#e9e9e9] p-2">
-					{#each languageOptions as option, i (i)}
-						<button
-							type="button"
-							class="rounded-[68px] px-5 py-2 text-sm text-[#2a2a2a] transition-all sm:px-7 sm:text-base lg:px-10 lg:py-2.5 lg:text-[24px]"
-							class:bg-white={selectedLanguage === option.value}
-							class:font-medium={selectedLanguage === option.value}
-							class:shadow-[0_3px_4px_0_rgba(0,0,0,0.15)]={selectedLanguage === option.value}
-							onclick={() => (selectedLanguage = option.value)}
-						>
-							{option.label}
-						</button>
-					{/each}
-				</div>
+        <div class="flex w-full gap-1 rounded-full bg-[#e0e0e0] p-1.5 xl:w-auto xl:justify-center xl:gap-2 xl:rounded-[24px] xl:bg-[#e9e9e9] xl:p-2">
+          {#each formatOptions as option}
+            <button
+              type="button"
+              class="min-h-[44px] flex-1 rounded-full px-2.5 py-2.5 text-[12px] leading-tight max-[380px]:px-1.5 max-[380px]:text-[11px] transition-all xl:flex-none xl:rounded-[68px] xl:px-10 xl:text-[24px] {selectedFormat === option.value ? 'bg-white font-medium shadow-md' : 'bg-transparent'}"
+              onclick={() => (selectedFormat = option.value)}
+            >
+              {option.label}
+            </button>
+          {/each}
+        </div>
+      </div>
+    </div>
 
-				<div class="flex flex-wrap justify-center gap-2 rounded-[24px] bg-[#e9e9e9] p-2">
-					{#each formatOptions as option, i (i)}
-						<button
-							type="button"
-							class="rounded-[68px] px-5 py-2 text-sm text-[#2a2a2a] transition-all sm:px-7 sm:text-base lg:px-10 lg:py-2.5 lg:text-[24px]"
-							class:bg-white={selectedFormat === option.value}
-							class:font-medium={selectedFormat === option.value}
-							class:shadow-[0_3px_4px_0_rgba(0,0,0,0.15)]={selectedFormat === option.value}
-							onclick={() => (selectedFormat = option.value)}
-						>
-							{option.label}
-						</button>
-					{/each}
-				</div>
-			</div>
-		</div>
+    <div class="flex flex-col gap-5 xl:gap-7">
+      <div
+        class="pricing-plans-scroller scrollbar-hide relative left-1/2 flex w-screen max-w-[100vw] -translate-x-1/2 snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden pb-4 pl-6 max-[380px]:pl-4 scroll-pl-6 max-[380px]:scroll-pl-4 xl:static xl:left-auto xl:w-full xl:max-w-none xl:translate-x-0 xl:grid xl:grid-cols-4 xl:justify-items-center xl:gap-4 xl:overflow-visible xl:pb-0 xl:snap-none"
+      >
+        {#each plans as plan, i (i)}
+          <div
+            class="pricing-plan-slide relative flex w-[min(300px,calc(100%-3.25rem))] shrink-0 snap-start flex-col justify-between rounded-[32px] bg-white p-6 shadow-[0_2px_16px_rgba(0,0,0,0.055)] xl:h-[340px] xl:w-[338px] xl:rounded-[32px] xl:px-[14px] xl:pt-[22px] xl:pb-[14px]"
+            style={plan.highlight ? 'background: linear-gradient(to bottom, #fde1e4 0%, white 40%)' : ''}
+          >
+            {#if plan.popular}
+              <div class="absolute top-2 right-4 z-10 xl:-top-3 xl:left-[68%] xl:right-auto xl:-translate-x-1/2">
+                <span
+                  class="block text-[34px] leading-none whitespace-nowrap text-[#ef6a78] xl:text-[62px]"
+                  style="font-family: 'Caveat', cursive; transform: rotate(5deg);"
+                >
+                  Популярно
+                </span>
+              </div>
+            {/if}
 
-		<div class="flex flex-col gap-6 lg:gap-7">
-			<div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-				{#each plans as plan, i (i)}
-					<div
-						class="relative flex min-h-[320px] flex-col justify-between rounded-[24px] px-4 pt-6 pb-4 shadow-[0_4px_4px_0_rgba(0,0,0,0.05)] lg:min-h-[360px] lg:rounded-[36px] lg:px-5 lg:pt-[30px]"
-						class:bg-white={!plan.highlight}
-						style={plan.highlight
-							? 'background: linear-gradient(to bottom, #fde1e4 0%, white 40%)'
-							: ''}
-					>
-						{#if plan.popular}
-							<div
-								class="absolute top-2 right-4 z-10 lg:-top-3 lg:right-auto lg:left-1/2 lg:-translate-x-1/2"
-							>
-								<span
-									class="block text-[34px] leading-none whitespace-nowrap text-[#ef6a78] lg:text-[62px]"
-									style="font-family: 'Caveat', cursive; transform: rotate(5deg);"
-								>
-									Популярно
-								</span>
-							</div>
-						{/if}
+            <div class="flex flex-col gap-4 lg:gap-2">
+              <h3 class="text-[21px] font-bold text-black xl:text-[20px] xl:font-medium xl:leading-[1.15] xl:tracking-[-0.02em]">{plan.title}</h3>
+              <div class="flex items-end gap-1">
+                <span class="text-[52px] font-bold tracking-tight text-black xl:text-[44px] xl:font-medium xl:leading-[1.1] xl:tracking-[-0.025em]">{plan.price}</span>
+                <span class="mb-1.5 text-[15px] font-bold text-black xl:text-[19px] xl:font-medium xl:leading-[1.1] xl:tracking-[-0.02em]">грн</span>
+              </div>
+              {#if plan.perLesson}
+                <p class="text-[13px] leading-[1.25] font-medium italic text-[#5b5b5b] xl:text-[15px] xl:leading-[1.2]">
+                  {plan.perLesson}
+                </p>
+              {/if}
+              <div class="h-[1px] w-full bg-[#d9d9d9] [clip-path:polygon(0%_50%,5%_0%,95%_0%,100%_50%,95%_100%,5%_100%)]"></div>
+              <p class="text-[15px] italic text-[#5c5c5c] xl:text-[18px] xl:leading-[1.2] xl:font-normal xl:italic">{plan.description}</p>
+            </div>
+            <button class="mt-8 h-[54px] w-full rounded-2xl border-t-[3px] border-white/40 text-[15px] font-bold text-white xl:mt-6 xl:h-[64px] xl:w-full xl:rounded-[18px] xl:px-6 xl:py-4 xl:text-[18px]" style="background: linear-gradient(180deg, #3b7cff 0%, #2568f6 45%, #1f5ae6 100%)">
+              {plan.cta}
+            </button>
+          </div>
+        {/each}
+        <div class="w-2 shrink-0 xl:hidden"></div>
+      </div>
 
-						<div class="flex flex-col gap-3">
-							<h3 class="text-[22px] leading-[1.15] font-medium text-[#2a2a2a] lg:text-[24px]">
-								{plan.title}
-							</h3>
+      <div
+        class="mx-auto flex w-full flex-col gap-6 rounded-[28px] p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)] xl:max-w-[1070px] xl:rounded-[48px] xl:p-10 xl:flex-row xl:items-center xl:justify-between"
+        style="background: linear-gradient(to bottom right, white, #def0ff)"
+      >
+        <div class="flex flex-col gap-4 xl:gap-6 xl:items-start">
+          <div class="flex  items-center gap-4 xl:flex-row xl:items-center">
+            <div class="relative h-[56px] w-[56px] shrink-0 overflow-hidden rounded-[14px] bg-[#d1e9ff] xl:h-[72px] xl:w-[72px] xl:rounded-[18px]">
+              <img
+                src={sharkLogo}
+                alt=""
+                class="absolute"
+                style="width: 135%; height: auto; top: -8%; left: -18%;"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
 
-							<div class="flex items-end gap-2">
-								<span class="text-[40px] leading-[1.1] font-medium text-[#2a2a2a] lg:text-[50px]">
-									{plan.price}
-								</span>
-								<span class="mb-1 text-[18px] font-medium text-[#2a2a2a] lg:text-[22px]">грн</span>
-							</div>
+            <h3
+              class="text-center text-[28px] leading-[1.1] font-bold xl:text-left xl:text-[40px] 2xl:text-[48px]"
+              style="background: linear-gradient(to bottom, #37a2ff 0%, #0450fb 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text"
+            >
+              {customRequest.title}
+            </h3>
+          </div>
 
-							{#if plan.perLesson}
-								<p class="text-[15px] leading-[1.2] text-[#2a2a2a] italic lg:text-[18px]">
-									{plan.perLesson}
-								</p>
-							{/if}
+          <p class="text-center text-[15px] leading-[1.4] font-medium text-[#515151] xl:text-left xl:text-[18px] xl:max-w-[700px]">
+             {customRequest.description}
+          </p>
+        </div>
 
-							<hr class="border-[#e0e0e0]" />
-
-							<p
-								class="text-[16px] leading-[1.3] text-[#2a2a2a] italic lg:text-[20px] lg:leading-[1.2]"
-							>
-								{plan.description}
-							</p>
-						</div>
-
-						<button
-							type="button"
-							class="mt-6 h-[56px] w-full rounded-[18px] border-t-[3px] border-white/40 px-4 text-[16px] font-medium text-white transition-opacity hover:opacity-90 lg:h-[76px] lg:rounded-[20px] lg:text-[22px]"
-							style="background: linear-gradient(180deg, #2b83ff 0%, #176afd 50%, #0450fb 100%)"
-						>
-							{plan.cta}
-						</button>
-					</div>
-				{/each}
-			</div>
-
-			<div
-				class="flex w-full flex-col gap-6 rounded-[28px] p-5 shadow-[0_4px_4px_0_rgba(0,0,0,0.05)] lg:rounded-[48px] lg:p-8 xl:flex-row xl:items-center xl:justify-between"
-				style="background: linear-gradient(to right, white, #def0ff)"
-			>
-				<div class="flex flex-col gap-4 lg:gap-5">
-					<div class="flex items-center gap-4">
-						<div
-							class="relative h-[56px] w-[56px] shrink-0 overflow-hidden rounded-[12px] bg-[#d1e9ff] lg:h-[69px] lg:w-[69px]"
-						>
-							<img
-								src={sharkLogo}
-								alt=""
-								class="absolute"
-								style="width: 72px; height: 90px; top: -6px; left: -6px;"
-							/>
-						</div>
-
-						<h3
-							class="text-[30px] leading-[1.1] font-medium lg:text-[42px] 2xl:text-[56px]"
-							style="background: linear-gradient(to bottom, #37a2ff 0%, #0450fb 60%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text"
-						>
-							{customRequest.title}
-						</h3>
-					</div>
-
-					<p
-						class="max-w-[760px] text-[16px] leading-[1.35] font-medium text-[#515151] lg:text-[18px]"
-					>
-						{customRequest.description}
-					</p>
-				</div>
-
-				<a
-					href="#contact"
-					class="flex h-[58px] shrink-0 items-center justify-center gap-3 rounded-[18px] border-t-[3px] border-white/40 px-6 text-[16px] font-medium text-white transition-opacity hover:opacity-90 lg:h-[73px] lg:rounded-[20px] lg:px-9 lg:text-[22px]"
-					style="background: linear-gradient(180deg, #2b83ff 0%, #176afd 50%, #0450fb 100%)"
-				>
-					<img src={telegramIcon} alt="" class="h-5 w-5 lg:h-7 lg:w-7" />
-					{customRequest.cta}
-				</a>
-			</div>
-		</div>
-	</div>
+        <a
+          href="#contact"
+          class="flex h-[58px] w-full shrink-0 items-center justify-center gap-3 rounded-[18px] border-t-[3px] border-white/40 px-6 text-[16px] font-bold text-white transition-all hover:brightness-110 active:scale-[0.98] sm:w-auto xl:h-[72px] xl:rounded-[20px] xl:px-10 xl:text-[18px] shadow-[0_8px_20px_rgba(4,80,251,0.15)]"
+          style="background: linear-gradient(180deg, #2b83ff 0%, #176afd 50%, #0450fb 100%)"
+        >
+          <img src={telegramIcon} alt="" class="h-6 w-6 xl:h-7 xl:w-7" decoding="async" />
+          {customRequest.cta}
+        </a>
+      </div>
+    </div>
+  </div>
 </section>
+
+<style>
+	.scrollbar-hide::-webkit-scrollbar {
+		display: none;
+	}
+
+	.scrollbar-hide {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+</style>

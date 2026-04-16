@@ -19,7 +19,11 @@
 	/>
 </svelte:head>
 
-<div class="min-h-scree">
+<<<<<<< HEAD
+<div class="min-h-screenф">
+=======
+<div class="min-h-screen">
+>>>>>>> 6b4a1fa9bee81e8018551a6f17df78f91975f254
 	<Header />
 	<main>
 		<Hero />
