@@ -1,10 +1,7 @@
 export type VideoCardContent = {
 	id: number;
 	nickname: string;
-<<<<<<< HEAD
 	videoUrl: string;
-=======
->>>>>>> 6b4a1fa9bee81e8018551a6f17df78f91975f254
 };
 
 export type TextReviewContent = {
@@ -17,17 +14,10 @@ export type TextReviewContent = {
 };
 
 export const videoCardsContent: VideoCardContent[] = [
-<<<<<<< HEAD
 	{ id: 1, nickname: 'nickname', videoUrl: 'https://www.youtube.com' },
 	{ id: 2, nickname: 'nickname', videoUrl: 'https://www.youtube.com' },
 	{ id: 3, nickname: 'nickname', videoUrl: 'https://www.youtube.com' },
 	{ id: 4, nickname: 'nickname', videoUrl: 'https://www.youtube.com' }
-=======
-	{ id: 1, nickname: 'nickname' },
-	{ id: 2, nickname: 'nickname' },
-	{ id: 3, nickname: 'nickname' },
-	{ id: 4, nickname: 'nickname' }
->>>>>>> 6b4a1fa9bee81e8018551a6f17df78f91975f254
 ];
 
 export const textReviewsContent: TextReviewContent[] = [
