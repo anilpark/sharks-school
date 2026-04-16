@@ -64,8 +64,16 @@
 					? 'background: linear-gradient(180deg, #2b83ff 0%, #176afd 50%, #0450fb 100%)'
 					: 'background: white'}
 			>
-				<div class="flex h-14 w-14 items-center justify-center">
-					<img src={value.icon} alt="" class="h-full w-full object-contain" />
+				<div
+					class="flex items-center justify-center"
+					class:h-11={i === 0}
+					class:w-11={i === 0}
+					class:h-14={i !== 0}
+					class:w-14={i !== 0}
+					class:lg:h-14={i === 0}
+					class:lg:w-14={i === 0}
+				>
+					<img src={value.icon} alt="" class="h-full w-full object-contain" loading="lazy" decoding="async" />
 				</div>
 
 				<div class="flex flex-col gap-4">

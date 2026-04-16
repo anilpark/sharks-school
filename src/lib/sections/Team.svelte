@@ -13,92 +13,27 @@
 	import teacher8 from '$lib/assets/teachers/teacher-8.webp';
 	import teacher9 from '$lib/assets/teachers/teacher-9.webp';
 	import teacher10 from '$lib/assets/teachers/teacher-10.webp';
+	import { teachersContent } from '$lib/content/team';
 	import { onMount, tick } from 'svelte';
 
 	const smallPhotos = [circleTeacher1, circleTeacher2, circleTeacher3];
-
-	const teachers = [
-		{
-			name: 'Олена',
-			role: 'Філологиня, викладач англійської та польської з сертифікатом CELTA',
-			lessons: '4000+',
-			quote:
-				'Я вибудовую партнерські стосунки з учнями, інтегрую їхні інтереси в уроки й поєдную структурованість із дружньою атмосферою. Мій принцип — Guide, not intimidate. Поза уроками я творча й захоплююся фотографією.',
-			photo: teacher3
-		},
-		{
-			name: 'Катерина',
-			role: 'Філологиня, викладачка англійської та організаторка книжкового клубу в Sharks School',
-			lessons: '4000+',
-			quote:
-				'Маю досвід роботи зі студентами від 5 до 55 років. Я емпатична й організована, у вільний час вивчаю мови, читаю трилери та доглядаю свого песика Річі. Найбільше ціную студентів і взаємний обмін знаннями та досвідом',
-			photo: teacher4
-		},
-		{
-			name: 'Марго',
-			role: 'Філологиня та перекладачка з освітою двох університетів у Польщі та Україні, викладачка польської та англійської',
-			lessons: '3500+',
-			quote:
-				'Я працюю з гумором - якщо на уроці без сміху, значить щось пішло не так. Вірю, що жарт допомагає вчити граматику. Люблю щире спілкування й заохочую говорити багато. Обожнюю тварин і мрію про рудого песика для компанії на уроках з матчою',
-			photo: teacher5
-		},
-		{
-			name: 'Марічка',
-			role: 'Викладач англійської мови з профільною педагогічною освітою та підтвердженим рівнем C1',
-			lessons: '3500+',
-			quote:
-				'У своїй роботі я найбільше цінує щирі, вдячні посмішки студентів. Я вважаю себе "вічним студентом" і переконана, що саме завдяки цьому можна залишатися натхненним викладачем і передавати учням якісні знання разом із мотивацією вчитися',
-			photo: teacher10
-		},
-		{
-			name: 'Ірина',
-			role: 'Засновниця школи, філологиня, учасниця програм обміну в США та Південній Кореї',
-			lessons: '6000+',
-			quote:
-				'Sharks School — мій особистий проєкт, у якому я втілюю ідеї, що визрівали роками. Завдяки філологічній освіті та досвіду життя в США я добре розумію тих, хто наполегливо вчить іноземну мову, особливо опинившись за кордоном',
-			photo: teacher1
-		},
-		{
-			name: 'Маргарита',
-			role: 'Філологиня, тім-лідерка команди',
-			lessons: '5000+',
-			quote:
-				'Я люблю змістовні розмови, цікавлюся досвідом студентів і відкрито ділюся своїм. Слідкую за методичною якістю уроків усієї команди. Фанатка мемів, гумору, гір і активного відпочинку — від хайкінгу до параглайдингу',
-			photo: teacher2
-		},
-		{
-			name: 'Маргарита',
-			role: 'Викладач англійської мови, вчителька з великим досвідом роботи з різними рівнями',
-			lessons: '4000+',
-			quote:
-				'Кожен учень — це окрема людина з унікальними інтересами та цілями. Моє завдання — зробити процес навчання цікавим та ефективним саме для вас',
-			photo: teacher6
-		},
-		{
-			name: 'Марія',
-			role: 'Викладач англійської та польської мови, фахівець з комунікативної методики',
-			lessons: '3500+',
-			quote:
-				'Навчання мові — це не просто граматика та словниковий запас, це спосіб мислення. Я допомагаю своїм учням думати іноземною мовою з першого заняття',
-			photo: teacher7
-		},
-		{
-			name: 'Катерина',
-			role: 'Досвідчений репетитор, спеціаліст з підготовки до іспитів IELTS та TOEFL',
-			lessons: '5000+',
-			quote:
-				'Підготовка до міжнародних іспитів — це командна робота. Разом ми досягнемо того результату, який відкриє перед вами нові можливості',
-			photo: teacher8
-		},
-		{
-			name: 'Катерина',
-			role: 'Досвідчений репетитор, спеціаліст з підготовки до іспитів IELTS та TOEFL',
-			lessons: '5000+',
-			quote:
-				'Підготовка до міжнародних іспитів — це командна робота. Разом ми досягнемо того результату, який відкриє перед вами нові можливості',
-			photo: teacher9
-		}
+	const teacherPhotos = [
+		teacher3,
+		teacher4,
+		teacher5,
+		teacher10,
+		teacher1,
+		teacher2,
+		teacher6,
+		teacher7,
+		teacher8,
+		teacher9
 	];
+
+	const teachers = teachersContent.map((teacher, index) => ({
+		...teacher,
+		photo: teacherPhotos[index] ?? teacher1
+	}));
 
 	let slider: HTMLDivElement | null = null;
 
@@ -113,83 +48,75 @@
 	});
 </script>
 
-<section id="team" class="w-full py-20">
-	<div class="mb-12 px-4 text-center">
-		<div class="title-row">
-			<h2 class="section-title text-gradient-dark">Наша</h2>
+<section id="team" class="w-full py-14 sm:py-20 lg:py-24 bg-[#f5f5f5]">
+	<div class="mb-10 w-full px-6 text-center sm:mb-14">
+	<div class="mx-auto flex w-[min(480px,calc(100vw-48px))] max-[380px]:w-[calc(100vw-32px)] flex-nowrap items-center justify-center gap-3 max-[430px]:flex-wrap max-[430px]:gap-2 md:gap-5">
+		<h2 class="whitespace-nowrap text-[36px] font-bold leading-none text-gray-900 max-[430px]:whitespace-normal max-[430px]:text-[clamp(28px,10vw,34px)] sm:text-[48px] md:text-[56px]">
+			Наша
+		</h2>
 
-			<div class="avatars" aria-hidden="true">
-				{#each smallPhotos as photo, i (i)}
-					<div class="avatar" style={`z-index:${10 - i}`}>
-						<img src={photo} alt="" />
-					</div>
-				{/each}
-			</div>
-
-			<h2 class="section-title text-gradient-dark">команда</h2>
+		<div class="flex shrink-0 -space-x-3 max-[380px]:-space-x-2 md:-space-x-5" aria-hidden="true">
+			{#each smallPhotos as photo, i (i)}
+				<div 
+					class="h-10 w-10 rounded-full border-2 border-[#f5f5f5] bg-gray-200 shadow-sm max-[380px]:h-9 max-[380px]:w-9 sm:h-12 sm:w-12 md:h-14 md:w-14 overflow-hidden" 
+					style={`z-index:${10 - i}`}
+				>
+					<img src={photo} alt="" class="h-full w-full object-cover" decoding="async" />
+				</div>
+			{/each}
 		</div>
 
-		<p class="section-subtitle mx-auto mt-4 max-w-[781px] text-center">
-			Професіонали, які допоможуть полюбити мову та досягти мети
-		</p>
+		<h2 class="whitespace-nowrap text-[36px] font-bold leading-none text-gray-900 max-[430px]:whitespace-normal max-[430px]:text-[clamp(28px,10vw,34px)] sm:text-[48px] md:text-[56px]">
+			команда
+		</h2>
 	</div>
 
+	<p class="mx-auto mt-6 max-w-[781px] text-[16px] leading-relaxed text-gray-600 sm:text-[18px]">
+		Професіонали, які допоможуть полюбити мову та досягти мети
+	</p>
+</div>
+
 	<div class="slider-shell">
-		<div class="teacher-slider scrollbar-hide" bind:this={slider}>
+		<div class="teacher-slider scrollbar-hide pb-8 pt-4" bind:this={slider}>
 			<div class="teacher-track">
 				{#each teachers as teacher, index (index + 100)}
-					<div
-						class="teacher-card relative flex h-[835px] h-auto shrink-0 flex-col overflow-hidden rounded-[24px]"
-					>
-						<div class="relative h-[473px] shrink-0 overflow-hidden">
+					<div class="teacher-card relative flex shrink-0 flex-col h-full pb-8">
+						
+						<div class="relative h-[320px] w-full shrink-0 overflow-hidden rounded-[24px] sm:h-[360px]">
 							<img
 								src={teacher.photo}
 								alt={teacher.name}
-								class="absolute h-full w-full object-cover"
+								class="absolute inset-0 h-full w-full object-cover object-top"
+								loading="lazy"
+								decoding="async"
 							/>
 
-							<div
-								class="absolute right-0 bottom-0 left-0 h-[166px]"
-								style="background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #f5f5f5 100%); backdrop-filter: blur(2px)"
-							></div>
+							<div class="absolute bottom-0 left-0 right-0 h-[140px] bg-gradient-to-t from-[#f5f5f5] via-[#f5f5f5]/80 to-transparent"></div>
 
-							<div
-								class="absolute top-[10px] right-[10px] h-[42px] w-[204px] overflow-hidden rounded-[14px] border border-white bg-white/80 backdrop-blur-[15px]"
-							>
-								<span
-									class="absolute top-[5px] left-[11px] text-[20px] leading-[1.3] font-medium text-[#0450fb]"
-								>
-									{teacher.lessons}
-								</span>
-								<span
-									class="absolute top-[14px] left-[73px] text-[14px] leading-none text-[#0450fb]"
-								>
-									Уроків проведено
-								</span>
+							<div class="absolute right-4 top-4 flex items-baseline gap-1.5 rounded-full bg-white/95 px-4 py-2 text-[#0047FF] shadow-[0_2px_12px_rgba(0,0,0,0.08)] backdrop-blur-md">
+								<span class="text-[15px] font-bold tracking-tight">{teacher.lessons}</span>
+								<span class="text-[13px] font-medium">Уроків проведено</span>
 							</div>
 						</div>
 
-						<div class="flex flex-1 flex-col bg-[#f5f5f5] p-5 pt-4">
-							<div class="flex flex-col gap-1">
-								<h3 class="text-center text-[36px] leading-normal font-medium text-[#1e1e1e]">
+						<div class="relative z-10 flex flex-1 flex-col px-4 pt-2 sm:px-6">
+							<div class="flex flex-col gap-2">
+								<h3 class="text-center text-[36px] font-medium text-[#1A1A1A] sm:text-[40px]">
 									{teacher.name}
 								</h3>
-								<p
-									class="min-h-23 text-center text-[18px] leading-[1.3] font-medium text-[#1e1e1e] opacity-60"
-								>
+								
+								<p class="mx-auto min-h-[72px] sm:min-h-[84px] w-full max-w-[320px] text-center text-[15px] leading-[1.4] text-[#666666]">
 									{teacher.role}
 								</p>
 							</div>
 
-							<div
-								class="relative mt-2 rounded-[20px] px-3 pt-3 pb-6"
-								style="background: linear-gradient(to bottom, rgba(222,230,253,0.3), #dee6fd)"
-							>
-								<p class="text-[16px] leading-normal font-medium text-[#0450fb]">
+							<div class="relative mt-5 rounded-[20px] bg-[#EAF0FF] p-5 sm:p-6 pb-6">
+								<p class="text-left text-[14px] leading-relaxed font-medium text-[#0047FF]">
 									{teacher.quote}
 								</p>
-								<div class="absolute right-5 -bottom-4 h-[40px] w-[46px]">
-									<img src={quoteIcon} alt="" class="h-full w-full" />
+								
+								<div class="absolute -bottom-6 right-5 h-[48px] w-[48px]">
+									<img src={quoteIcon} alt="quote" class="h-full w-full" loading="lazy" decoding="async" />
 								</div>
 							</div>
 						</div>
@@ -222,23 +149,26 @@
 
 	.teacher-slider {
 		overflow-x: auto;
-		overflow-y: hidden;
+		overflow-y: visible; 
 		scroll-behavior: smooth;
 		scroll-snap-type: x mandatory;
 		scroll-padding-inline: var(--edge-safe-space);
 		padding-inline: var(--edge-safe-space);
 		overscroll-behavior-x: contain;
+		display: flex;
 	}
 
 	.teacher-track {
 		display: flex;
-		gap: 16px;
+		gap: 24px;
 		width: max-content;
+		padding-bottom: 32px; 
+		align-items: stretch;
 	}
 
 	.teacher-card {
-		width: min(365px, calc(100vw - 32px));
-		scroll-snap-align: start;
+		width: min(380px, calc(100vw - 32px));
+		scroll-snap-align: center;
 		scroll-snap-stop: always;
 	}
 
@@ -248,34 +178,32 @@
 		bottom: 0;
 		width: var(--edge-safe-space);
 		pointer-events: none;
-		z-index: 5;
-		backdrop-filter: blur(2px);
-		-webkit-backdrop-filter: blur(2px);
+		z-index: 20;
 	}
 
 	.slider-edge--left {
 		left: 0;
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #f5f5f5 50%);
+		background: linear-gradient(90deg, #f5f5f5 20%, rgba(245,245,245,0) 100%);
 	}
 
 	.slider-edge--right {
 		right: 0;
-		background: linear-gradient(
-			270deg,
-			rgba(245, 245, 245, 0.96) 0%,
-			rgba(245, 245, 245, 0.72) 45%,
-			rgba(245, 245, 245, 0) 100%
-		);
+		background: linear-gradient(270deg, #f5f5f5 20%, rgba(245,245,245,0) 100%);
 	}
 
 	@media (max-width: 768px) {
 		.slider-shell {
-			--edge-blur-width: 20px;
+			--edge-blur-width: 12px;
 			--edge-gap: 12px;
+			--edge-safe-space: 24px;
+		}
+
+		.teacher-slider {
+			scroll-padding-inline: 24px;
 		}
 
 		.teacher-card {
-			width: min(408px, calc(100vw - 24px));
+			width: min(340px, calc(100vw - 48px));
 		}
 	}
 </style>

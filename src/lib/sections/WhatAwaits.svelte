@@ -61,7 +61,7 @@
 
 <section id="what-awaits" class="relative w-full overflow-hidden py-14 sm:py-16 lg:py-20">
 	<!-- Header -->
-	<div class="mb-10 flex flex-col items-center gap-3 px-4 sm:mb-14 sm:gap-4 lg:mb-20">
+	<div class="mb-10 flex flex-col items-center gap-3 px-6 sm:mb-14 sm:gap-4 lg:mb-20">
 		<div class="relative">
 			<h2 class="section-title text-gradient-dark text-center">Що на вас чекає</h2>
 
@@ -87,7 +87,7 @@
 		</p>
 	</div>
 
-	<!-- Desktop staggered layout -->
+	<!-- Desktop  -->
 	<div class="paper-pattern relative mx-auto hidden h-[1300px] max-w-[1400px] lg:block">
 		{#each cards as card, index (index)}
 			<div class="absolute {card.rotate}" style="top: {card.top}; left: {card.left}; width: 408px;">
@@ -97,7 +97,7 @@
 					<div
 						class="absolute -top-7 left-1/2 h-[108px] w-[105px] -translate-x-1/2 overflow-visible"
 					>
-						<img src={card.img} alt="" />
+						<img src={card.img} alt="" loading="lazy" decoding="async" />
 					</div>
 
 					<div
@@ -125,9 +125,9 @@
 		{/each}
 	</div>
 
-	<!-- Mobile / tablet cards -->
+	<!-- Mobile cards -->
 	<div
-		class="mobile-paper-pattern mx-auto flex max-w-[320px] flex-col items-center gap-12.5 px-4 sm:max-w-[560px] sm:gap-7 md:hidden"
+		class="mobile-paper-pattern mx-auto flex max-w-[320px] flex-col items-center gap-12.5 px-6 sm:max-w-[560px] sm:gap-7 md:hidden"
 	>
 		{#each cards as card, index (index)}
 			<div class={`w-full max-w-[253px] ${index % 2 === 0 ? 'rotate-[5deg]' : 'rotate-[-5deg]'}`}>
@@ -135,7 +135,7 @@
 					class="relative flex min-h-[248.04px] flex-col gap-[9.55px] rounded-[34.73px] bg-white px-[13.23px] pt-[52.92px] pb-[13.23px] shadow-[0_24px_32px_0_rgba(45,6,6,0.10)]"
 				>
 					<div class="absolute -top-5 left-1/2 h-[78px] w-[76px] -translate-x-1/2 overflow-visible">
-						<img src={card.img} alt="" class="h-full w-full object-contain" />
+						<img src={card.img} alt="" class="h-full w-full object-contain" loading="lazy" decoding="async" />
 					</div>
 
 					<div
@@ -173,7 +173,7 @@
 					class="relative flex min-h-[280px] flex-col gap-3 rounded-[36px] bg-white px-4 pt-[58px] pb-4 shadow-[0_28px_36px_0_rgba(45,6,6,0.10)]"
 				>
 					<div class="absolute -top-5 left-1/2 h-[84px] w-[82px] -translate-x-1/2 overflow-visible">
-						<img src={card.img} alt="" class="h-full w-full object-contain" />
+						<img src={card.img} alt="" class="h-full w-full object-contain" loading="lazy" decoding="async" />
 					</div>
 
 					<div

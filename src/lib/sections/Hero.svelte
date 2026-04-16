@@ -9,48 +9,53 @@
 
 <section
 	id="home"
-	class="relative w-full overflow-hidden bg-[#f4f4f4] pt-[96px] pb-[48px] sm:pt-[108px] sm:pb-[56px] lg:pt-[124px] lg:pb-[80px] xl:min-h-175"
+	class="relative w-full overflow-hidden bg-[#f4f4f4] pt-[86px] pb-[48px] sm:pt-[108px] sm:pb-[56px] lg:pt-[124px] lg:pb-[80px] xl:min-h-175"
 >
-	<!-- Mobile / tablet decorative elements -->
+	<!-- Mobile -->
 	<div class="pointer-events-none absolute inset-0 xl:hidden">
-		<img src={bindersBox} alt="" class="absolute top-[10px] left-[-34px] w-[112px] opacity-95" />
+		<img src={bindersBox} alt="" class="absolute top-[10px] left-[-34px] w-[112px] opacity-95" decoding="async" />
 
 		<img
 			src={pens}
 			alt=""
 			class="absolute top-[36px] right-[-8px] w-[126px] rotate-[6deg] opacity-95"
+			decoding="async"
 		/>
 
 		<img
 			src={notepad}
 			alt=""
 			class="absolute top-[178px] right-[-68px] w-[172px] rotate-[8deg] opacity-90"
+			decoding="async"
 		/>
 
 		<img
 			src={binders}
 			alt=""
 			class="absolute top-[352px] left-[-30px] w-[76px] -rotate-[20deg] opacity-95"
+			decoding="async"
 		/>
 
 		<img
 			src={binders}
 			alt=""
 			class="absolute bottom-[178px] left-[-38px] w-[72px] rotate-[20deg] opacity-95"
+			decoding="async"
 		/>
 
 		<img
 			src={binders}
 			alt=""
 			class="absolute bottom-[58px] left-[-44px] w-[68px] -rotate-[15deg] opacity-90"
+			decoding="async"
 		/>
 	</div>
 
-	<!-- Desktop decorative elements -->
+	<!-- Desktop  -->
 	<div class="pointer-events-none absolute inset-0 hidden xl:block">
 		<div class="absolute -top-25 left-0 h-197.25 w-101.5">
-			<img src={bindersBox} alt="" class="absolute" />
-			<img src={binders} alt="" class="absolute" style="left: 80px; top: 50%;" />
+			<img src={bindersBox} alt="" class="absolute" decoding="async" />
+			<img src={binders} alt="" class="absolute" style="left: 80px; top: 50%;" decoding="async" />
 		</div>
 
 		<div class="absolute top-3 right-0 h-197.25 w-[320px]">
@@ -59,6 +64,7 @@
 				alt=""
 				class="absolute rounded-2xl"
 				style="right: 0px; top: 198px; width: 260px; height: 480px;"
+				decoding="async"
 			/>
 		</div>
 
@@ -68,16 +74,17 @@
 				alt=""
 				class="absolute rounded-2xl"
 				style="right: 0px; top: 0px; width: 190px; height: 430px; transform: translateY(-50%)"
+				decoding="async"
 			/>
 		</div>
 	</div>
 
-	<div class="relative z-10 mx-auto flex max-w-[1440px] flex-col items-center px-4 sm:px-6 lg:px-8">
-		<!-- Badge -->
+	<div class="relative z-10 mx-auto flex max-w-[1440px] flex-col items-center px-6 lg:px-8">
+		<!-- Badge (skip only on mobile) -->
 		<div
-			class="flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-[#525252] px-4 py-2 sm:px-6 sm:py-2.5 lg:px-8"
+			class="hidden max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-[#525252] px-4 py-2 sm:flex sm:px-6 sm:py-2.5 lg:px-8"
 		>
-			<img src={mortarboard} alt="" class="h-5 w-5 sm:h-6 sm:w-6" />
+			<img src={mortarboard} alt="" class="h-5 w-5 sm:h-6 sm:w-6" decoding="async" />
 			<span
 				class="text-center text-[13px] leading-[1.25] font-medium text-[#525252] sm:text-[15px] lg:text-base"
 				style="text-wrap: balance"
@@ -87,7 +94,7 @@
 		</div>
 
 		<!-- Mobile title -->
-		<div class="mt-8 w-full lg:hidden">
+		<div class="mt-6 w-full max-sm:mt-4 sm:mt-8 lg:hidden">
 			<h1 class="mx-auto max-w-[430px] text-center">
 				<span
 					class="block text-left text-[clamp(38px,11vw,60px)] leading-[0.9] font-medium tracking-[-2.2px] text-[#2a2a2a]"
@@ -147,7 +154,7 @@
 
 		<!-- Buttons -->
 		<div
-			class="mt-8 flex w-full max-w-[339px] flex-col gap-3 sm:mt-9 lg:mt-12 lg:max-w-none lg:flex-row lg:items-center lg:justify-center lg:gap-2"
+			class="mt-8 flex w-full flex-col gap-3 sm:mt-9 sm:max-w-[339px] lg:mt-12 lg:max-w-none lg:flex-row lg:items-center lg:justify-center lg:gap-2"
 		>
 			<a
 				href="#contact"
@@ -162,7 +169,7 @@
 				class="flex h-[57px] w-full items-center justify-center gap-[8.42px] rounded-[14px] border-[0.84px] border-text px-[33.69px] pt-[12.63px] pb-[12.63px] text-center text-[16px] font-medium text-text transition-colors hover:bg-black/[0.03] lg:h-[68px] lg:w-[271px] lg:gap-[10px] lg:border lg:px-[36px] lg:pt-[15px] lg:pb-[15px] lg:text-[18px]"
 			>
 				Дізнатись більше
-				<img src={arrowRightIcon} alt="" class="h-5 w-5 shrink-0 lg:h-6 lg:w-6" />
+				<img src={arrowRightIcon} alt="" class="h-5 w-5 shrink-0 lg:h-6 lg:w-6" decoding="async" />
 			</a>
 		</div>
 	</div>
