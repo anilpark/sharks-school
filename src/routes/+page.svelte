@@ -21,14 +21,12 @@
 
 <div class="min-h-screen">
 	<Header />
-	<main>
+	<main class="section-stack">
 		<Hero />
 		<Stats />
 		<WhatAwaits />
 		<Team />
-		<div class="blue-pattern">
-			<Reviews />
-		</div>
+		<Reviews />
 		<Pricing />
 		<Values />
 		<FAQ />

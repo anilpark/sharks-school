@@ -19,7 +19,7 @@
 
 <section
   id="pricing"
-  class="w-full bg-[#f5f5f5] py-10 xl:bg-transparent xl:px-8 xl:py-20"
+  class="w-full bg-[#f5f5f5] section-pad xl:bg-transparent xl:px-8"
 >
   <div class="pricing-content-column mx-auto w-full max-w-[min(480px,calc(100vw-48px))] max-[380px]:max-w-[calc(100vw-32px)] xl:max-w-[1440px]">
     
@@ -32,12 +32,13 @@
       </p>
 
       <div class="mt-2 flex w-full flex-col items-stretch gap-3 xl:mt-4 xl:flex-row xl:flex-wrap xl:justify-center xl:gap-3">
-        <div class="flex w-full gap-1 rounded-full bg-[#e0e0e0] p-1.5 xl:w-auto xl:justify-center xl:gap-2 xl:rounded-[24px] xl:bg-[#e9e9e9] xl:p-2">
+        <div class="flex w-full gap-1 rounded-[var(--radius-tab-container)] bg-[#e0e0e0] p-1.5 xl:w-auto xl:justify-center xl:gap-2 xl:bg-[#e9e9e9] xl:p-2">
           {#each languageOptions as option}
             <button
               type="button"
-              class="min-h-[44px] flex-1 rounded-full px-4 py-2.5 text-[15px] max-[380px]:px-2 max-[380px]:text-[13px] transition-all xl:flex-none xl:rounded-[68px] xl:px-10 xl:text-[24px] 
-              {selectedLanguage === option.value ? 'bg-white font-medium shadow-md' : 'bg-transparent'}"
+              class="min-h-[44px] flex-1 px-4 py-2.5 text-[15px] font-medium max-[380px]:px-2 max-[380px]:text-[13px] transition-all xl:flex-none xl:px-10 xl:text-[24px]
+              {selectedLanguage === option.value ? 'rounded-[var(--radius-tab-active)]' : 'rounded-[var(--radius-tab-container)]'}
+              {selectedLanguage === option.value ? 'bg-white text-[#1d1d1d] shadow-md' : 'bg-transparent text-[#4a4a4a] hover:bg-black/5'}"
               onclick={() => (selectedLanguage = option.value)}
             >
               {option.label}
@@ -45,11 +46,12 @@
           {/each}
         </div>
 
-        <div class="flex w-full gap-1 rounded-full bg-[#e0e0e0] p-1.5 xl:w-auto xl:justify-center xl:gap-2 xl:rounded-[24px] xl:bg-[#e9e9e9] xl:p-2">
+        <div class="flex w-full gap-1 rounded-[var(--radius-tab-container)] bg-[#e0e0e0] p-1.5 xl:w-auto xl:justify-center xl:gap-2 xl:bg-[#e9e9e9] xl:p-2">
           {#each formatOptions as option}
             <button
               type="button"
-              class="min-h-[44px] flex-1 rounded-full px-2.5 py-2.5 text-[12px] leading-tight max-[380px]:px-1.5 max-[380px]:text-[11px] transition-all xl:flex-none xl:rounded-[68px] xl:px-10 xl:text-[24px] {selectedFormat === option.value ? 'bg-white font-medium shadow-md' : 'bg-transparent'}"
+              class="min-h-[44px] flex-1 px-2.5 py-2.5 text-[12px] leading-tight font-medium max-[380px]:px-1.5 max-[380px]:text-[11px] transition-all xl:flex-none xl:px-10 xl:text-[24px]
+              {selectedFormat === option.value ? 'rounded-[var(--radius-tab-active)] bg-white text-[#1d1d1d] shadow-md' : 'rounded-[var(--radius-tab-container)] bg-transparent text-[#4a4a4a] hover:bg-black/5'}"
               onclick={() => (selectedFormat = option.value)}
             >
               {option.label}

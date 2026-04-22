@@ -1,39 +1,7 @@
 <script lang="ts">
 	import quoteIcon from '$lib/assets/quote.svg';
-	import circleTeacher1 from '$lib/assets/teachers/circle-teacher-1.webp';
-	import circleTeacher2 from '$lib/assets/teachers/circle-teacher-2.webp';
-	import circleTeacher3 from '$lib/assets/teachers/circle-teacher-3.webp';
-	import teacher1 from '$lib/assets/teachers/teacher-1.webp';
-	import teacher2 from '$lib/assets/teachers/teacher-2.webp';
-	import teacher3 from '$lib/assets/teachers/teacher-3.webp';
-	import teacher4 from '$lib/assets/teachers/teacher-4.webp';
-	import teacher5 from '$lib/assets/teachers/teacher-5.webp';
-	import teacher6 from '$lib/assets/teachers/teacher-6.webp';
-	import teacher7 from '$lib/assets/teachers/teacher-7.webp';
-	import teacher8 from '$lib/assets/teachers/teacher-8.webp';
-	import teacher9 from '$lib/assets/teachers/teacher-9.webp';
-	import teacher10 from '$lib/assets/teachers/teacher-10.webp';
-	import { teachersContent } from '$lib/content/team';
+	import { teachers, teachersHeaderAvatars } from '$lib/config/teachers.config';
 	import { onMount, tick } from 'svelte';
-
-	const smallPhotos = [circleTeacher1, circleTeacher2, circleTeacher3];
-	const teacherPhotos = [
-		teacher3,
-		teacher4,
-		teacher5,
-		teacher10,
-		teacher1,
-		teacher2,
-		teacher6,
-		teacher7,
-		teacher8,
-		teacher9
-	];
-
-	const teachers = teachersContent.map((teacher, index) => ({
-		...teacher,
-		photo: teacherPhotos[index] ?? teacher1
-	}));
 
 	let slider: HTMLDivElement | null = null;
 
@@ -48,7 +16,7 @@
 	});
 </script>
 
-<section id="team" class="w-full py-14 sm:py-20 lg:py-24 bg-[#f5f5f5]">
+<section id="team" class="w-full section-pad bg-[#f5f5f5]">
 	<div class="mb-10 w-full px-6 text-center sm:mb-14">
 	<div class="mx-auto flex w-[min(480px,calc(100vw-48px))] max-[380px]:w-[calc(100vw-32px)] flex-nowrap items-center justify-center gap-3 max-[430px]:flex-wrap max-[430px]:gap-2 md:gap-5">
 		<h2 class="whitespace-nowrap text-[36px] font-bold leading-none text-gray-900 max-[430px]:whitespace-normal max-[430px]:text-[clamp(28px,10vw,34px)] sm:text-[48px] md:text-[56px]">
@@ -56,7 +24,7 @@
 		</h2>
 
 		<div class="flex shrink-0 -space-x-3 max-[380px]:-space-x-2 md:-space-x-5" aria-hidden="true">
-			{#each smallPhotos as photo, i (i)}
+			{#each teachersHeaderAvatars as photo, i (i)}
 				<div 
 					class="h-10 w-10 rounded-full border-2 border-[#f5f5f5] bg-gray-200 shadow-sm max-[380px]:h-9 max-[380px]:w-9 sm:h-12 sm:w-12 md:h-14 md:w-14 overflow-hidden" 
 					style={`z-index:${10 - i}`}

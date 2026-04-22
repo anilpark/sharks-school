@@ -6,7 +6,7 @@
 	let openIndex: number | null = null;
 </script>
 
-<section id="faq" class="relative w-full overflow-hidden bg-transparent py-12 lg:px-6 lg:py-20">
+<section id="faq" class="relative w-full overflow-hidden bg-transparent section-pad lg:px-6">
 	<!-- Header -->
 	<div class="mx-auto mb-9 flex w-[min(480px,calc(100vw-48px))] max-[380px]:w-[calc(100vw-32px)] max-w-[1149px] flex-col items-center gap-3 text-center lg:mb-16 lg:w-auto lg:gap-4">
 		<h2 class="section-title text-gradient-dark">Поширені запитання</h2>

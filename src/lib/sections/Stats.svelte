@@ -2,7 +2,7 @@
 	import lesson from '$lib/assets/lesson.webp';
 </script>
 
-<section id="stats" class="w-full py-16">
+<section id="stats" class="w-full section-pad">
 	<div class="mx-auto max-w-300 px-6 max-[380px]:px-4">
 		<!-- Desktop grid layout -->
 		<div

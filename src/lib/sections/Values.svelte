@@ -46,7 +46,7 @@
 	];
 </script>
 
-<section id="values" class="w-full px-6 py-20">
+<section id="values" class="w-full px-6 section-pad">
 	<!-- Header -->
 	<div class="mb-16 flex flex-col items-center gap-5">
 		<h2 class="section-title text-gradient-dark max-w-[1066px] text-center">Наші цінності</h2>

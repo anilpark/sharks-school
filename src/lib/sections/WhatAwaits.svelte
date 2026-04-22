@@ -59,7 +59,7 @@
 	];
 </script>
 
-<section id="what-awaits" class="relative w-full overflow-hidden py-14 sm:py-16 lg:py-20">
+<section id="what-awaits" class="relative w-full overflow-hidden section-pad">
 	<!-- Header -->
 	<div class="mb-10 flex flex-col items-center gap-3 px-6 sm:mb-14 sm:gap-4 lg:mb-20">
 		<div class="relative">
